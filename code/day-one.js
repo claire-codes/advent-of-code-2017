@@ -1,6 +1,6 @@
 module.exports = (function() {
   return {
-    captcha: function(code) {
+    captchaOne: function(code) {
         // assume a string cos easier to split,
         // then parse to integer when necessary
         var numbers = code.split('');
@@ -14,6 +14,22 @@ module.exports = (function() {
             } else {
                 if (number === numbers[0]) {
                     runningTotal += parseInt(number);
+                }
+            }
+        });
+        return runningTotal;
+    },
+
+    captchaTwo: function(code) {
+        // assume a string cos easier to split,
+        // then parse to integer when necessary
+        var numbers = code.split('');
+        var runningTotal = 0;
+        var halfway = stepsAhead = numbers.length / 2;
+        numbers.forEach(function(number, index) {
+            if (index < halfway) {
+                if (number === numbers[index + stepsAhead]) {
+                    runningTotal += (parseInt(number) * 2);
                 }
             }
         });
